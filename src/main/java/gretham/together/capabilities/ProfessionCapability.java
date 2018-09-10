@@ -1,7 +1,9 @@
 package gretham.together.capabilities;
 
 import gretham.together.professions.IProfession;
+import gretham.together.professions.Profession;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import java.util.ArrayList;
@@ -11,20 +13,31 @@ public class ProfessionCapability implements IProfessionCapability, INBTSerializ
 
     public static int MAX_PROFESSIONS = 2;
 
-    private List<IProfession> professions;
+    private List<Profession> professions;
     private int professionsCount;
 
     /**
      * Initializes capability.
      */
     public ProfessionCapability() {
-        professions = new ArrayList<IProfession>();
-        professionsCount = 0;
+        this.professions = new ArrayList<Profession>();
+        this.professionsCount = 0;
     }
 
     @Override
     public NBTTagCompound serializeNBT() {
-        return null;
+        NBTTagCompound nbt = new NBTTagCompound();
+        NBTTagList professionsList = new NBTTagList();
+
+        List<Profession> professions = this.getProfessions();
+
+        for (Profession profession : professions) {
+            professionsList.appendTag(profession.serializeNBT());
+        }
+
+        nbt.setTag("professions", professionsList);
+
+        return nbt;
     }
 
     @Override
@@ -33,17 +46,17 @@ public class ProfessionCapability implements IProfessionCapability, INBTSerializ
     }
 
     @Override
-    public List<IProfession> getProfessions() {
-        return professions;
+    public List<Profession> getProfessions() {
+        return this.professions;
     }
 
     @Override
-    public boolean addProfession(IProfession profession) {
-        if (professionsCount >= MAX_PROFESSIONS) {
+    public boolean addProfession(Profession profession) {
+        if (this.professionsCount >= MAX_PROFESSIONS) {
             return false;
         }
 
-        professions.add(profession);
+        this.professions.add(profession);
 
         return true;
     }

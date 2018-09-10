@@ -1,6 +1,6 @@
 package gretham.together.capabilities;
 
-import gretham.together.professions.IProfession;
+import gretham.together.professions.Profession;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface IProfessionCapability {
      *
      * @return list of profesions.
      */
-    public List<IProfession> getProfessions();
+    List<Profession> getProfessions();
 
     /**
      * Adds profession to capability.
@@ -20,6 +20,6 @@ public interface IProfessionCapability {
      *
      * @return result of adding professions to capability.
      */
-    public boolean addProfession(IProfession Profession);
+    boolean addProfession(Profession Profession);
 
 }
