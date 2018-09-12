@@ -7,7 +7,7 @@ public class ProfessionFactory {
                 return new Miner();
 
             case "profession_smith":
-                return new Miner();
+                return new Smith();
 
             default:
                 throw new RuntimeException("Unable to recognise profession by given ID.");
