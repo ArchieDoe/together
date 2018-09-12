@@ -9,7 +9,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ProfessionProvider implements  ICapabilitySerializable<NBTBase> {
+public class ProfessionProvider implements ICapabilitySerializable<NBTBase> {
 
     @CapabilityInject(IProfessionCapability.class)
     public static Capability<IProfessionCapability> CAPABILITY_PROFESSION = null;
@@ -29,11 +29,11 @@ public class ProfessionProvider implements  ICapabilitySerializable<NBTBase> {
 
     @Override
     public NBTBase serializeNBT() {
-        return null;
+        return CAPABILITY_PROFESSION.getStorage().writeNBT(CAPABILITY_PROFESSION, this.instance, null);
     }
 
     @Override
     public void deserializeNBT(NBTBase nbt) {
-
+        CAPABILITY_PROFESSION.getStorage().readNBT(CAPABILITY_PROFESSION, this.instance, null, nbt);
     }
 }

@@ -4,10 +4,10 @@ import gretham.together.capabilities.IProfessionCapability;
 
 import java.util.concurrent.Callable;
 
-public class ProfessionFactory implements Callable<IProfessionCapability> {
+public class ProfessionCapabilityFactory implements Callable<IProfessionCapability> {
     private Class<? extends IProfessionCapability> desiredClass;
 
-    public ProfessionFactory(Class<? extends IProfessionCapability> classToCreate) {
+    public ProfessionCapabilityFactory(Class<? extends IProfessionCapability> classToCreate) {
         desiredClass = classToCreate;
     }
 

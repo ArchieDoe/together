@@ -1,13 +1,11 @@
 package gretham.together.professions;
 
 import gretham.together.professions.bonus.IBonus;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.INBTSerializable;
 
 import java.util.List;
 
-abstract public class Profession implements IProfession, INBTSerializable<NBTTagCompound> {
+abstract public class Profession implements IProfession {
 
     protected String name;
     protected String id;
@@ -46,6 +44,7 @@ abstract public class Profession implements IProfession, INBTSerializable<NBTTag
 
         nbt.setInteger("level", this.level);
         nbt.setInteger("exp", this.exp);
+        nbt.setString("id", this.id);
 
         return nbt;
     }

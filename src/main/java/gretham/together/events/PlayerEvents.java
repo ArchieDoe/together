@@ -5,6 +5,7 @@ import gretham.together.capabilities.ProfessionProvider;
 import gretham.together.professions.IProfession;
 import gretham.together.professions.Miner;
 import gretham.together.professions.Profession;
+import gretham.together.professions.Smith;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -15,17 +16,25 @@ import java.util.List;
 public class PlayerEvents {
 
     @SubscribeEvent
-    public void onPlayerLogsIn(PlayerEvent.PlayerLoggedInEvent event)
-    {
+    public void onPlayerLogsIn(PlayerEvent.PlayerLoggedInEvent event) {
         EntityPlayer player = event.player;
         IProfessionCapability professionCapability = player.getCapability(ProfessionProvider.CAPABILITY_PROFESSION, null);
 
-        professionCapability.addProfession(new Miner());
-
-        List<Profession> playerProfessions = professionCapability.getProfessions();
+        List<IProfession> playerProfessions = professionCapability.getProfessions();
 
         for (IProfession profession : playerProfessions) {
             player.sendMessage(new TextComponentString(String.format("You got profession: %s", profession.getName())));
         }
+    }
+
+    @SubscribeEvent
+    public void onPlayerFall(PlayerEvent.ItemPickupEvent event) {
+        EntityPlayer player = event.player;
+        IProfessionCapability professionCapability = player.getCapability(ProfessionProvider.CAPABILITY_PROFESSION, null);
+
+        Smith profession = new Smith();
+        professionCapability.addProfession(profession);
+
+        player.sendMessage(new TextComponentString(String.format("You got profession: %s", profession.getName())));
     }
 }
