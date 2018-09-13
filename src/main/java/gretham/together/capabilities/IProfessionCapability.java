@@ -24,4 +24,6 @@ public interface IProfessionCapability extends INBTSerializable<NBTTagCompound> 
      */
     boolean addProfession(IProfession Profession);
 
+    void resetProfessions();
+
 }

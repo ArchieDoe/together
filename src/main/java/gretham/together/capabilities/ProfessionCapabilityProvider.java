@@ -9,7 +9,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ProfessionProvider implements ICapabilitySerializable<NBTBase> {
+public class ProfessionCapabilityProvider implements ICapabilitySerializable<NBTBase> {
 
     @CapabilityInject(IProfessionCapability.class)
     public static Capability<IProfessionCapability> CAPABILITY_PROFESSION = null;

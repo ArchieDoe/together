@@ -1,24 +1,33 @@
 package gretham.together.events;
 
+import gretham.together.TogetherMod;
 import gretham.together.capabilities.IProfessionCapability;
-import gretham.together.capabilities.ProfessionProvider;
+import gretham.together.capabilities.ProfessionCapabilityProvider;
 import gretham.together.professions.IProfession;
 import gretham.together.professions.Miner;
-import gretham.together.professions.Profession;
 import gretham.together.professions.Smith;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.List;
 
+@Mod.EventBusSubscriber(
+    modid = TogetherMod.MODID
+)
 public class PlayerEvents {
 
     @SubscribeEvent
-    public void onPlayerLogsIn(PlayerEvent.PlayerLoggedInEvent event) {
+    public static void onPlayerLogsIn(PlayerEvent.PlayerLoggedInEvent event) {
         EntityPlayer player = event.player;
-        IProfessionCapability professionCapability = player.getCapability(ProfessionProvider.CAPABILITY_PROFESSION, null);
+        IProfessionCapability professionCapability = player.getCapability(ProfessionCapabilityProvider.CAPABILITY_PROFESSION, null);
+
+        if (professionCapability == null) {
+            return;
+        }
 
         List<IProfession> playerProfessions = professionCapability.getProfessions();
 
@@ -27,14 +36,7 @@ public class PlayerEvents {
         }
     }
 
-    @SubscribeEvent
-    public void onPlayerFall(PlayerEvent.ItemPickupEvent event) {
-        EntityPlayer player = event.player;
-        IProfessionCapability professionCapability = player.getCapability(ProfessionProvider.CAPABILITY_PROFESSION, null);
-
-        Smith profession = new Smith();
-        professionCapability.addProfession(profession);
-
-        player.sendMessage(new TextComponentString(String.format("You got profession: %s", profession.getName())));
-    }
+//    public void keyPress(PlayerEvent. {
+//
+//    }
 }

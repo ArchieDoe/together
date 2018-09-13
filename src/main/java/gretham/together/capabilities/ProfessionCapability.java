@@ -21,7 +21,7 @@ public class ProfessionCapability implements IProfessionCapability {
      * Initializes capability.
      */
     public ProfessionCapability() {
-        this.professions = new ArrayList<IProfession>();
+        this.professions = new ArrayList<>();
         this.professionsCount = 0;
     }
 
@@ -49,7 +49,7 @@ public class ProfessionCapability implements IProfessionCapability {
         for (int i = 0; i < professionsList.tagCount(); ++i) {
             NBTTagCompound profTag = professionsList.getCompoundTagAt(i);
 
-            IProfession prof = null;
+            IProfession prof;
 
             try {
                 prof = ProfessionFactory.create(profTag.getString("id"));
@@ -79,5 +79,10 @@ public class ProfessionCapability implements IProfessionCapability {
         professionsCount++;
 
         return true;
+    }
+
+    public void resetProfessions() {
+        this.professions = new ArrayList<>();
+        professionsCount = 0;
     }
 }
