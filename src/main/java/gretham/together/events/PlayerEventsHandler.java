@@ -3,9 +3,15 @@ package gretham.together.events;
 import gretham.together.TogetherMod;
 import gretham.together.capabilities.IProfessionCapability;
 import gretham.together.capabilities.ProfessionCapabilityProvider;
+import gretham.together.control.KeyBindings;
+import gretham.together.gui.ProfessionGui;
 import gretham.together.professions.IProfession;
 import gretham.together.professions.Miner;
 import gretham.together.professions.Smith;
+import gretham.together.proxies.ClientProxy;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.capabilities.Capability;
@@ -22,7 +28,7 @@ import java.util.List;
 @Mod.EventBusSubscriber(
     modid = TogetherMod.MODID
 )
-public class PlayerEvents {
+public class PlayerEventsHandler {
 
     @SubscribeEvent
     public static void onPlayerLogsIn(PlayerEvent.PlayerLoggedInEvent event) {
@@ -42,7 +48,14 @@ public class PlayerEvents {
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent(priority= EventPriority.NORMAL, receiveCanceled=true)
-    public static void onEvent(InputEvent.KeyInputEvent event)
+    public static void onKeyPressed(InputEvent.KeyInputEvent event)
     {
+        Minecraft mc = Minecraft.getMinecraft();
+
+        KeyBinding[] keyBindings = KeyBindings.keyBindings;
+
+        if (keyBindings[0].isPressed()) {
+            Minecraft.getMinecraft().displayGuiScreen(new ProfessionGui());
+        }
     }
 }
