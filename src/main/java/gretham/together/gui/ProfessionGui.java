@@ -11,8 +11,8 @@ import java.io.IOException;
 public class ProfessionGui extends GuiScreen {
 
     private static final ResourceLocation MAIN_TEXTURE = new ResourceLocation(TogetherMod.MODID, "textures/gui/profession_gui.png");
-    private int guiWidth = 256;
-    private int guiHeight = 320;
+    private int guiWidth = 160;
+    private int guiHeight = 192 ;
 
     public ProfessionGui() {
         super();

@@ -1,7 +1,9 @@
 package gretham.together;
 
+import gretham.together.alterations.BlockAlterations;
 import gretham.together.handlers.EventsHandler;
 import gretham.together.proxies.CommonProxy;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -26,14 +28,15 @@ public class TogetherMod
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        // BlockAlterations.alterBlocks();
         logger = event.getModLog();
-        proxy.init();
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+        proxy.init();
+
         handler.registerEvents();
-        logger.info("Mod initialized");
     }
 }
