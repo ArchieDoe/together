@@ -28,7 +28,7 @@ public class TogetherMod
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        // BlockAlterations.alterBlocks();
+        BlockAlterations.alterBlocks();
         logger = event.getModLog();
     }
 
